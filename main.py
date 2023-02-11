@@ -56,11 +56,41 @@ def list_post():
         try:
             id = int(input('>>>'))
             if id in id_list:
-                print('게시글 상세보기')
+                # print('게시글 상세보기')
+                detail_post(id)
+                break
             elif id == -1:
                 break
             else:
                 print('없는 글번호입니다.')
+        except ValueError:
+            print('숫자를 입력하세요')
+
+
+def detail_post(id):
+    """ 게시글 상세 보기 """
+    print('\n\n - 게시글 상세 -')
+
+    for post in post_list:
+        if post.get_id() == id:
+            post.add_view_count()
+            print('번호: ', post.get_id())
+            print('제목: ', post.get_title())
+            print('본문: ', post.get_content())
+            print('조회수: ', post.get_view_count())
+
+    while True:
+        print('Q) 수정:1  삭제:2  (메뉴로 돌아가려면 -1을 입력)')
+        try:
+            choice = int(input('>>>'))
+            if choice == 1:
+                print('수정')
+                break
+            elif choice == 2:
+                print('삭제')
+                break
+            elif choice == -1:
+                break
         except ValueError:
             print('숫자를 입력하세요')
 
